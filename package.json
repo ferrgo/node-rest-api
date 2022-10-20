@@ -1,0 +1,14 @@
+{
+  "name": "shopping-cart-promos-challenge",
+  "version": "1.0.0",
+  "description": "Shopping Cart With Promotions",
+  "main": "src/main.ts",
+  "author": "Hugo Gouveia",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=16.18.0",
+    "npm": "please-use-yarn",
+    "yarn": ">=1.22.0"
+  }
+}
