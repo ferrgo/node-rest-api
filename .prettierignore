@@ -1,4 +1,4 @@
-# Prod Env
+# Env
 .env
 
 # compiled output
@@ -36,3 +36,6 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# Node
+package-lock.json

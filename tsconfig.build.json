@@ -1,0 +1,10 @@
+{
+	"extends": "./tsconfig.json",
+	"exclude": [
+		"node_modules",
+		"commitlint.config.ts",
+		"test",
+		"dist",
+		"**/*.test.ts"
+	]
+}
