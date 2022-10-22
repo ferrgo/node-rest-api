@@ -5,7 +5,13 @@ export class Cart {
 	private itemMap: Map<string, CartItem> = new Map<string, CartItem>();
 	private total = 0;
 	private discount = 0;
-	constructor(private readonly promo: Promo | undefined = undefined) {}
+	private promo: Promo | undefined;
+
+	public applyPromo(promo: Promo): void {
+		this.promo = promo;
+		this.updateFinalPrice();
+	}
+
 	public getFinalPrice(): number {
 		return this.total - this.discount;
 	}

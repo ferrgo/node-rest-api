@@ -71,7 +71,8 @@ describe('Cart', () => {
 	describe('Get 3 for the price of 2 Promo', () => {
 		let cart: Cart;
 		beforeEach(() => {
-			cart = new Cart(new ThreeForTwoPromo());
+			cart = new Cart();
+			cart.applyPromo(new ThreeForTwoPromo());
 		});
 		it('Should add 1 product and update total to products price', () => {
 			cart.addItem(mockedProducts[0]);
