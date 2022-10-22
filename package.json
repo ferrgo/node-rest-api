@@ -41,14 +41,6 @@
 		"collectCoverageFrom": [
 			"**/*.(t|j)s"
 		],
-		"coverageThreshold": {
-			"global": {
-				"branches": 90,
-				"functions": 90,
-				"lines": 80,
-				"statements": -20
-			}
-		},
 		"coverageDirectory": "../coverage/tests",
 		"testEnvironment": "node",
 		"moduleNameMapper": {
@@ -59,6 +51,7 @@
 		"@commitlint/cli": "^17.1.2",
 		"@commitlint/config-conventional": "^17.1.0",
 		"@commitlint/types": "^17.0.0",
+		"@types/express": "^4.17.14",
 		"@types/jest": "^29.2.0",
 		"@types/node": "^18.11.2",
 		"@typescript-eslint/eslint-plugin": "^5.40.1",
@@ -74,7 +67,9 @@
 		"ts-mockito": "^2.6.1"
 	},
 	"dependencies": {
+		"express": "^4.18.2",
 		"ts-node": "^10.9.1",
+		"tsconfig-paths": "^4.1.0",
 		"typescript": "^4.8.4"
 	}
 }

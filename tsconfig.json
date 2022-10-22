@@ -15,9 +15,13 @@
 		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": false,
 		"noFallthroughCasesInSwitch": false,
+		"esModuleInterop": true,
 		"paths": {
 			"src/*": ["src/*"],
 			"test/*": ["test/*"]
 		}
+	},
+	"ts-node": {
+		"require": ["tsconfig-paths/register"]
 	}
 }

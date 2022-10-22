@@ -5,7 +5,7 @@ import { ProductRepository } from '../product.repository';
 
 class DummyRepository implements ProductRepository {
 	getOne(id: string): Promise<Product | undefined> {
-		return Promise.resolve(new Product(id, 'fake product', 0.99));
+		return Promise.resolve(new Product(id, 'macbook', 0.99, 'fake product'));
 	}
 	getAll(): Promise<Product[]> {
 		return Promise.resolve([]);
@@ -23,25 +23,25 @@ describe('Product Service', () => {
 	});
 	it('should fetch all products using repository', async () => {
 		const mockedProducts = [
-			new Product('1', 'fake description', 10),
-			new Product('2', 'another fake description', 20),
+			new Product('1', 't-shirt', 10, 'fake description'),
+			new Product('2', 'dress', 20, 'another fake description'),
 		];
 		when(mockedRepository.getAll()).thenResolve(mockedProducts);
 		const service = new ProductService(instance(mockedRepository));
 		const returnedProducts = await service.getAll();
 		expect(returnedProducts).toStrictEqual([
-			new Product('1', 'fake description', 10),
-			new Product('2', 'another fake description', 20),
+			new Product('1', 't-shirt', 10, 'fake description'),
+			new Product('2', 'dress', 20, 'another fake description'),
 		]);
 		verify(mockedRepository.getAll()).once();
 	});
 	it('should fetch a product by id using repository', async () => {
-		const mockedProduct = new Product('1', 'fake description', 10);
+		const mockedProduct = new Product('1', 't-shirt', 10, 'fake description');
 		when(mockedRepository.getOne('1')).thenResolve(mockedProduct);
 		const service = new ProductService(instance(mockedRepository));
 		const returnedProduct = await service.getOne('1');
 		expect(returnedProduct).toStrictEqual(
-			new Product('1', 'fake description', 10),
+			new Product('1', 't-shirt', 10, 'fake description'),
 		);
 		verify(mockedRepository.getOne('1')).once();
 	});

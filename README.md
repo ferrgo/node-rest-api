@@ -1,5 +1,22 @@
 ## Shopping Cart with Promo discounts
 
+## Running
+
+### Using Docker-compose
+
+This projects tests can be run using docker and docker-compose to avoid local dependencies installed, you'll need docker and docker-compose installed
+
+See [Dockerfile.dev](./Dockerfile.dev) and [docker-compose.dev.yaml](./docker-compose.dev.yaml) for details
+
+- docker
+- docker-compose
+
+```sh
+docker-compose -f docker-compose.dev.yaml up --build
+```
+
+This will start the server with nodemon and watch for file changes
+
 ## Testing
 
 ### Using Docker-compose
