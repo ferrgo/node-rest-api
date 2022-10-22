@@ -2,10 +2,12 @@ import { CartItem } from './cart-item';
 import { Promo } from '../promo/promo.model';
 
 export class Cart {
-	private itemMap: Map<string, CartItem> = new Map<string, CartItem>();
-	private total = 0;
-	private discount = 0;
-	private promo: Promo | undefined;
+	public itemMap: Map<string, CartItem> = new Map<string, CartItem>();
+	public total = 0;
+	public discount = 0;
+	public promo: Promo | undefined;
+
+	constructor(public readonly id: string) {}
 
 	public applyPromo(promo: Promo): void {
 		this.promo = promo;

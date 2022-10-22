@@ -11,30 +11,30 @@ describe('Cart', () => {
 
 	describe('Empty', () => {
 		it('Should create and empty cart', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			expect(cart).toBeDefined();
 		});
 		it('Should have total price equal 0', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			expect(cart.getFinalPrice()).toEqual(0);
 		});
 	});
 
 	describe('Adding products', () => {
 		it('Should add 1 product and update total to products price', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			cart.addItem(mockedProducts[0]);
 			expect(cart.getFinalPrice()).toEqual(12.99);
 		});
 		it('Should add 3 product and update total to products price', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			cart.addItem(mockedProducts[0]);
 			cart.addItem(mockedProducts[1]);
 			cart.addItem(mockedProducts[2]);
 			expect(cart.getFinalPrice()).toEqual(58.64);
 		});
 		describe('with 0 items of quantity', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			beforeEach(() => {
 				cart.addItem(mockedProducts[0]);
 				cart.addItem(mockedProducts[1]);
@@ -51,7 +51,7 @@ describe('Cart', () => {
 
 	describe('Removing products', () => {
 		it('Should remove the single cartItem and have final price equal to 0', () => {
-			const cart = new Cart();
+			const cart = new Cart('1');
 			cart.addItem(mockedProducts[0]);
 			expect(cart.getFinalPrice()).toEqual(12.99);
 			cart.removeItem(mockedProducts[0].productId);
@@ -59,7 +59,7 @@ describe('Cart', () => {
 		});
 		describe('that is not present in cart', () => {
 			it('Should throw error and leave final price unchanged', () => {
-				const cart = new Cart();
+				const cart = new Cart('1');
 				expect(() => cart.removeItem('1')).toThrow(
 					"Product not found in cart. Trying to remove product with id: '1'",
 				);
@@ -71,7 +71,7 @@ describe('Cart', () => {
 	describe('Get 3 for the price of 2 Promo', () => {
 		let cart: Cart;
 		beforeEach(() => {
-			cart = new Cart();
+			cart = new Cart('1');
 			cart.applyPromo(new ThreeForTwoPromo());
 		});
 		it('Should add 1 product and update total to products price', () => {

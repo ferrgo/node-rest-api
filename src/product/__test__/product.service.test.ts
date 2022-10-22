@@ -12,7 +12,7 @@ class DummyRepository implements ProductRepository {
 	}
 }
 
-describe('Get Products Use Case', () => {
+describe('Product Service', () => {
 	const mockedRepository: ProductRepository = mock(DummyRepository);
 	afterEach(() => {
 		reset(mockedRepository);
