@@ -1,4 +1,4 @@
-import { CartItem } from 'src/cart/cart-item';
+import { CartItem } from '../../cart/cart-item';
 import { ThreeForTwoPromo } from '../three-for-two-promo';
 
 describe('Get 3 for the price of 2 Promo', () => {
