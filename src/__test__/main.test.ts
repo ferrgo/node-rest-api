@@ -1,12 +1,9 @@
-describe('Main test sample', () => {
-	beforeEach(async () => {
-		console.log('Before');
-	});
+import { main } from 'src/main';
 
+describe('Main test sample', () => {
 	describe('Suite', () => {
 		it('Sucess', () => {
-			console.log('Test passing');
-			expect(true).toBeTruthy();
+			expect(main()).toBeDefined();
 		});
 	});
 });

@@ -1,5 +1,7 @@
-const main = (): void => {
-	console.log('Hello world');
+export const main = (): string => {
+	const res = 'Hello world';
+	console.log(res);
+	return res;
 };
 
 main();
