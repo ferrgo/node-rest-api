@@ -1,5 +1,6 @@
 import { Product } from '../product/product';
 import { ProductService } from '../product/product.service';
+import { ThreeForTwoPromo } from '../promo/three-for-two-promo';
 import { Cart } from './cart';
 import { CartItem } from './cart-item';
 import { CartDTO } from './cart.dto';
@@ -41,6 +42,13 @@ export class CartService {
 		const cart: Cart | undefined = await this.repository.getOne(id);
 		if (!cart) throw new Error('CART_NOT_FOUND');
 		cart.removeItem(productId);
+		return CartDTO.fromEntity(cart);
+	}
+
+	public async checkoutOne(id: string): Promise<CartDTO | undefined> {
+		const cart: Cart | undefined = await this.repository.getOne(id);
+		if (!cart) return undefined;
+		cart.applyPromo(new ThreeForTwoPromo());
 		return CartDTO.fromEntity(cart);
 	}
 }

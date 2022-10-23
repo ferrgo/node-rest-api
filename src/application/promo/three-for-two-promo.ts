@@ -2,6 +2,7 @@ import { CartItem } from '../cart/cart-item';
 import { Promo } from './promo.model';
 
 export class ThreeForTwoPromo implements Promo {
+	constructor(public readonly name: string = 'GET_THREE_FOR_TWO') {}
 	public getDiscount(items: Map<string, CartItem>): number {
 		const totalItems = Array.from(items.entries()).reduce((quantity, entry) => {
 			const cartItemFromEntry: CartItem = entry[1];

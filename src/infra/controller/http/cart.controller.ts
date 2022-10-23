@@ -22,6 +22,7 @@ export class CartHTTPController {
 			'/carts/:cartId/products/:productId',
 			this.removeItemFromCart,
 		);
+		this.server.on(HTTPMethod.PUT, '/carts/:id/checkout', this.checkoutCart);
 	}
 
 	private insertOneCart = async (
@@ -162,6 +163,30 @@ export class CartHTTPController {
 			{ params, body },
 		);
 		const cartDTO = await this.service.getOne(getOneParams.id);
+		if (!cartDTO) {
+			this.logger.info(`[CartHTTPController] Not found: ${getOneParams.id}`);
+			throw new HTTPError(
+				`Cart Not Found for id: ${getOneParams.id}`,
+				HTTPErrorCodes.NOT_FOUND,
+			);
+		}
+		return cartDTO;
+	};
+
+	private checkoutCart = async (
+		params: unknown,
+		body: unknown,
+	): Promise<CartDTO> => {
+		type CheckoutCartParams = {
+			id: string;
+		};
+
+		const getOneParams = params as CheckoutCartParams;
+		this.logger.info(
+			`[CartHTTPController] Checking out Cart with id: ${getOneParams.id}`,
+			{ params, body },
+		);
+		const cartDTO = await this.service.checkoutOne(getOneParams.id);
 		if (!cartDTO) {
 			this.logger.info(`[CartHTTPController] Not found: ${getOneParams.id}`);
 			throw new HTTPError(
