@@ -36,4 +36,11 @@ export class CartService {
 		cart.addItem(new CartItem(quantity, product.id, product.price));
 		return CartDTO.fromEntity(cart);
 	}
+
+	public async removeItem(id: string, productId: string): Promise<CartDTO> {
+		const cart: Cart | undefined = await this.repository.getOne(id);
+		if (!cart) throw new Error('CART_NOT_FOUND');
+		cart.removeItem(productId);
+		return CartDTO.fromEntity(cart);
+	}
 }

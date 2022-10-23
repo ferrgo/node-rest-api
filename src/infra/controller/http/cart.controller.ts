@@ -17,6 +17,11 @@ export class CartHTTPController {
 			'/carts/:cartId/products/:productId',
 			this.addItemToCart,
 		);
+		this.server.on(
+			HTTPMethod.DELETE,
+			'/carts/:cartId/products/:productId',
+			this.removeItemFromCart,
+		);
 	}
 
 	private insertOneCart = async (
@@ -104,6 +109,45 @@ export class CartHTTPController {
 		}
 	};
 
+	private removeItemFromCart = async (
+		params: unknown,
+		body: unknown,
+	): Promise<CartDTO> => {
+		type RemoveItemFromCartParams = {
+			cartId: string;
+			productId: string;
+		};
+		const removeItemToCartParam = params as RemoveItemFromCartParams;
+		// TODO: Improve this, should link to a customer cpf to ensure tracking and avoid passing id in body
+		if (!this.isValidRemoveItemFromCartParams(removeItemToCartParam)) {
+			throw new HTTPError(
+				'Param must contains the cart string id and product string id',
+				HTTPErrorCodes.BAD_REQUEST,
+			);
+		}
+		this.logger.info(
+			`[CartHTTPController] removing product (id:'${removeItemToCartParam.productId}') from cart (id: '${removeItemToCartParam.cartId}')`,
+			{ params, body },
+		);
+		try {
+			const cartDTO = await this.service.removeItem(
+				removeItemToCartParam.cartId,
+				removeItemToCartParam.productId,
+			);
+			this.logger.info('[CartHTTPController] removed item from cart');
+			return cartDTO;
+		} catch (error) {
+			this.logger.info(
+				`[CartHTTPController] Failed to remove item (product id: '${removeItemToCartParam.productId}') from cart id: ${removeItemToCartParam.cartId}`,
+				{ errorMessage: (error as Error).message },
+			);
+			throw new HTTPError(
+				`Failed to add item with error: ${(error as Error).message}`,
+				HTTPErrorCodes.BAD_REQUEST,
+			);
+		}
+	};
+
 	private getOneCart = async (
 		params: unknown,
 		body: unknown,
@@ -146,6 +190,19 @@ export class CartHTTPController {
 
 	private isValidInsertBody(insertOneBody: { id: string }): boolean {
 		return !!insertOneBody.id && typeof insertOneBody.id === 'string';
+	}
+
+	private isValidRemoveItemFromCartParams(removeItemFromCartBody: {
+		cartId: string;
+		productId: string;
+	}): boolean {
+		const hasCartIdString =
+			!!removeItemFromCartBody.cartId &&
+			typeof removeItemFromCartBody.cartId === 'string';
+		const hasProductIdString =
+			!!removeItemFromCartBody.productId &&
+			typeof removeItemFromCartBody.productId === 'string';
+		return hasCartIdString && hasProductIdString;
 	}
 
 	private isValidAddItemToCartParams(addItemToCartBody: {
