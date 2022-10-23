@@ -2,6 +2,17 @@
 
 ## Running
 
+### Using yarn
+
+Have [Yarn](https://yarnpkg.com/) installed locally:
+
+```sh
+yarn
+yarn run start:dev
+```
+
+This will run using nodemon to allow hotreload of app
+
 ### Using Docker-compose
 
 This project can be run using docker and docker-compose to avoid local dependencies installing, you'll need docker and docker-compose installed
@@ -18,6 +29,17 @@ docker-compose -f docker-compose.dev.yaml up --build
 This will start the server with [nodemon](https://nodemon.io/) and watch for file changes
 
 ## Testing
+
+### Using yarn
+
+Have [Yarn](https://yarnpkg.com/) installed locally:
+
+```sh
+yarn
+yarn run test:cov
+```
+
+This will run jest to execute tests and create coverage report
 
 ### Using Docker-compose
 
