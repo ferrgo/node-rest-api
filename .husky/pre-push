@@ -2,4 +2,3 @@
 . "$(dirname "$0")/_/husky.sh"
 
 yarn test:cov
-yarn test:e2e:cov

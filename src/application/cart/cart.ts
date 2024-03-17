@@ -41,10 +41,12 @@ export class Cart {
 		const cartItem: CartItem = this.getItemFromCartItems(productId);
 		const newQuantity: number = cartItem.quantity - 1;
 		if (newQuantity === 0) this.itemMap.delete(productId);
-		this.itemMap.set(
-			productId,
-			new CartItem(newQuantity, productId, cartItem.productPrice),
-		);
+		else {
+			this.itemMap.set(
+				productId,
+				new CartItem(newQuantity, productId, cartItem.productPrice),
+			);
+		}
 		this.updateFinalPrice();
 	}
 
